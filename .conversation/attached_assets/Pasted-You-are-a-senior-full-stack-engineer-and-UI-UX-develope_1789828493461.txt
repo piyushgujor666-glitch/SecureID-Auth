@@ -1,0 +1,1580 @@
+You are a senior full-stack engineer and UI/UX developer.
+
+I need you to build a complete production-quality authentication website for my internship assignment.
+
+IMPORTANT:
+Do not just create a static UI.
+I need a fully functional Login + Registration Journey with frontend, backend API, validation, OTP flow, JWT authentication, protected routes, /api/me, logout, responsive design, error states, loading states, and deployment-ready configuration.
+
+The assignment is based on the attached/reference Assignment.pdf.
+
+FIRST:
+If Assignment.pdf is available in the current workspace, READ IT COMPLETELY before writing code.
+
+The assignment requirements are:
+
+1. Implement Login and Registration Journey.
+2. HTML, CSS and JavaScript must be understandable and editable without AI.
+3. There are mobile and web reference screenshots.
+4. Host the website on Vercel.
+5. Expected Vercel format:
+   your-name-secureid.vercel.app
+6. Part 1:
+   - Watch IAM Basics videos.
+   - Implement Registration Journey.
+   - Send Part 1 Vercel link on Internshala.
+7. Part 2:
+   - Implement Login Journey.
+8. Push code to GitHub.
+9. Share GitHub and Vercel links on Internshala.
+10. Confirm that the 3 IAM Basics videos were watched.
+
+There is also a later live-coding requirement:
+After confirmation from the Internshala admin, I must record myself implementing the registration password enhancement without AI.
+
+That live coding requirement includes:
+- HTML show/hide password control.
+- Password strength indicator.
+- CSS states for Weak / Medium / Strong.
+- JavaScript password visibility toggle.
+- JavaScript dynamic password strength calculation.
+- JavaScript prevention of registration when password is below minimum strength.
+- Explain OTP flow from button click to backend response.
+- Explain Authentication → Session/JWT flow.
+- Explain how tokens/sessions are created.
+- Explain where tokens/sessions are stored.
+- Explain how tokens are sent.
+- Explain how tokens are validated.
+- Explain /api/me.
+- Explain logout and invalidation.
+- Video must be 15–30 minutes.
+- Upload video to YouTube as Unlisted.
+
+DO NOT remove or simplify these requirements.
+
+==================================================
+PROJECT GOAL
+==================================================
+
+Build a website called:
+
+SecureID
+
+The site should look like a modern professional identity/authentication platform.
+
+The visual design should closely follow the reference screenshots from Assignment.pdf.
+
+Do NOT blindly copy every pixel if doing so hurts usability, but preserve:
+- overall layout
+- typography hierarchy
+- spacing
+- blue/purple security-oriented visual theme
+- cards
+- input styling
+- buttons
+- icons
+- verification screens
+- error states
+- success states
+- mobile responsiveness
+- desktop/web layout
+
+The website must look like a real product, not a student demo.
+
+==================================================
+TECH STACK
+==================================================
+
+Use:
+
+Frontend:
+- HTML5
+- CSS3
+- Vanilla JavaScript
+
+Backend:
+- Node.js
+- Express.js where appropriate
+- REST API
+
+Authentication:
+- JWT access token
+- bcrypt/bcryptjs for password hashing
+
+Database:
+Use a proper persistent database.
+
+Preferred:
+Supabase PostgreSQL
+
+If Supabase configuration is not available yet, create a clean database abstraction so the application can run locally with a development fallback, but DO NOT pretend the fallback is production authentication.
+
+OTP:
+Implement backend OTP generation and verification.
+
+For production email OTP:
+Use an email provider abstraction such as Resend.
+
+Environment variables must be used for secrets.
+
+Deployment:
+Vercel-compatible architecture.
+
+IMPORTANT:
+Do not create a separate backend that cannot be deployed with Vercel unless absolutely necessary.
+
+Prefer:
+- frontend static files
+- Vercel serverless API functions under /api
+OR
+a Vercel-compatible Node API architecture.
+
+The final project must be deployable to Vercel.
+
+==================================================
+PROJECT STRUCTURE
+==================================================
+
+Use a clean structure similar to:
+
+secureid/
+│
+├── public/
+│   ├── index.html
+│   ├── login.html
+│   ├── register.html
+│   ├── email-otp.html
+│   ├── mobile-otp.html
+│   ├── authenticator.html
+│   ├── success.html
+│   ├── dashboard.html
+│   ├── forgot-password.html
+│   ├── reset-password.html
+│   │
+│   ├── css/
+│   │   ├── global.css
+│   │   ├── auth.css
+│   │   └── dashboard.css
+│   │
+│   ├── js/
+│   │   ├── common.js
+│   │   ├── login.js
+│   │   ├── register.js
+│   │   ├── otp.js
+│   │   ├── dashboard.js
+│   │   └── auth.js
+│   │
+│   └── assets/
+│       ├── logo.svg
+│       ├── security.svg
+│       ├── email.svg
+│       ├── mobile.svg
+│       └── qr-placeholder.svg
+│
+├── api/
+│   ├── auth/
+│   │   ├── register.js
+│   │   ├── login.js
+│   │   ├── me.js
+│   │   ├── logout.js
+│   │   ├── send-otp.js
+│   │   ├── verify-otp.js
+│   │   ├── resend-otp.js
+│   │   ├── forgot-password.js
+│   │   └── reset-password.js
+│   │
+│   └── health.js
+│
+├── lib/
+│   ├── db.js
+│   ├── jwt.js
+│   ├── password.js
+│   ├── otp.js
+│   ├── email.js
+│   └── validation.js
+│
+├── database/
+│   └── schema.sql
+│
+├── .env.example
+├── .gitignore
+├── package.json
+├── vercel.json
+└── README.md
+
+Keep the architecture simple enough that I can understand it.
+
+==================================================
+DESIGN SYSTEM
+==================================================
+
+Create a professional SecureID visual system.
+
+Primary color:
+deep blue / indigo
+
+Secondary:
+purple / blue gradients where appropriate
+
+Background:
+very light gray/white
+
+Cards:
+white
+rounded corners
+subtle shadow
+clean borders
+
+Buttons:
+primary blue
+rounded
+clear hover state
+disabled state
+loading state
+
+Inputs:
+rounded
+clear focus border
+clear error border
+error message below input
+
+Typography:
+modern sans-serif
+high readability
+
+Use icons where useful.
+
+Do not overuse animations.
+
+Use subtle:
+- fade
+- slide
+- loading spinner
+- progress indicators
+
+Do not create flashy unnecessary animations.
+
+==================================================
+RESPONSIVENESS
+==================================================
+
+The reference includes both mobile and web screens.
+
+The website MUST work correctly at:
+
+320px
+375px
+390px
+430px
+768px
+1024px
+1280px
+1440px
+
+Desktop:
+centered authentication card with appropriate side visual area if suitable.
+
+Mobile:
+single-column layout
+comfortable spacing
+large touch targets
+no horizontal scrolling
+
+Test every authentication screen on mobile.
+
+==================================================
+PAGE 1 — LANDING / ENTRY
+==================================================
+
+Create a clean SecureID entry page.
+
+Include:
+
+SecureID logo
+
+Headline:
+"Secure access starts here"
+
+Supporting text explaining secure authentication.
+
+Buttons:
+
+"Create Account"
+
+"Login"
+
+Do not overcomplicate this page.
+
+==================================================
+PAGE 2 — REGISTRATION
+==================================================
+
+Create the registration screen based on the reference screenshots.
+
+Heading:
+
+"Create your account"
+
+Subtitle:
+"Enter your details to get started"
+
+Fields:
+
+First Name
+Last Name
+Email
+Mobile Number
+Password
+Confirm Password
+
+Include password requirements.
+
+Example:
+
+At least 8 characters
+One uppercase letter
+One lowercase letter
+One number
+One special character
+
+Create Account button.
+
+Also include:
+
+"Already have an account? Login"
+
+==================================================
+PASSWORD SHOW/HIDE
+==================================================
+
+Password field must have a visible Show/Hide control.
+
+Behavior:
+
+Default:
+password hidden.
+
+Click Show:
+password becomes visible.
+
+Click Hide:
+password becomes hidden.
+
+Do the same on Login.
+
+This must be implemented in JavaScript.
+
+==================================================
+PASSWORD STRENGTH
+==================================================
+
+Implement a real dynamic password strength indicator.
+
+Strength levels:
+
+Weak
+Medium
+Strong
+
+Calculate strength as the user types.
+
+Suggested scoring:
+
+Length >= 8
++1
+
+Uppercase
++1
+
+Lowercase
++1
+
+Number
++1
+
+Special character
++1
+
+Score:
+
+0–2 = Weak
+
+3–4 = Medium
+
+5 = Strong
+
+Display:
+
+Password strength: Weak
+
+Password strength: Medium
+
+Password strength: Strong
+
+Also display requirement checklist.
+
+Each requirement should change from:
+
+✗
+
+to
+
+✓
+
+when satisfied.
+
+Do not rely only on color.
+
+Make it accessible with text.
+
+==================================================
+REGISTRATION VALIDATION
+==================================================
+
+Validate:
+
+First name required
+Last name required
+Valid email
+Valid mobile
+Password required
+Confirm password required
+Passwords must match
+Password must meet minimum strength
+Email must be unique
+
+Show clear error messages.
+
+Examples:
+
+"First name is required."
+
+"Please enter a valid email address."
+
+"Passwords do not match."
+
+"Password must be at least Medium strength."
+
+"An account with this email already exists."
+
+Do not use browser alert() for normal validation.
+
+Show errors inside the UI.
+
+==================================================
+REGISTRATION API
+==================================================
+
+Create:
+
+POST /api/auth/register
+
+Request:
+
+{
+  firstName,
+  lastName,
+  email,
+  mobile,
+  password
+}
+
+Backend must:
+
+1. Validate input.
+2. Check whether user exists.
+3. Hash password using bcrypt.
+4. Create user.
+5. Generate email verification OTP.
+6. Store OTP securely with expiration.
+7. Send OTP through the email service.
+8. Return a safe response.
+
+NEVER return the user's password.
+
+NEVER store plaintext passwords.
+
+NEVER store password in localStorage.
+
+==================================================
+EMAIL OTP SCREEN
+==================================================
+
+Create a screen based on the reference.
+
+Heading:
+
+"Email Verification"
+
+Text:
+
+"Enter the 6-digit code sent to your email."
+
+Display six OTP inputs.
+
+Behavior:
+
+- automatically move to next box
+- backspace moves to previous box
+- only numbers allowed
+- paste 6-digit OTP should work
+- disable Verify button until appropriate
+- show loading state
+- show invalid OTP state
+- show expired OTP state
+- show resend state
+- show countdown
+
+Example:
+
+Resend code in 00:45
+
+Then:
+
+Resend code
+
+==================================================
+OTP API
+==================================================
+
+Create:
+
+POST /api/auth/send-otp
+
+POST /api/auth/verify-otp
+
+POST /api/auth/resend-otp
+
+OTP requirements:
+
+- cryptographically secure random OTP
+- 6 digits
+- expiration
+- limited attempts
+- resend cooldown
+- invalidate OTP after successful verification
+- do not store plaintext OTP if possible
+- store hashed OTP
+
+Response examples:
+
+Success:
+
+{
+  "success": true,
+  "message": "OTP verified successfully"
+}
+
+Failure:
+
+{
+  "success": false,
+  "message": "Invalid or expired OTP"
+}
+
+Do not expose the OTP in production API responses.
+
+For local development, if an email provider is not configured, provide a clearly documented development-only mode.
+
+==================================================
+EMAIL OTP STATES
+==================================================
+
+Support:
+
+1. Initial OTP screen
+2. Correct OTP
+3. Wrong OTP
+4. Expired OTP
+5. Resend OTP
+6. Maximum attempts reached
+7. Loading state
+8. Success state
+
+Reference screenshot states should be reflected in the UI.
+
+==================================================
+MOBILE VERIFICATION
+==================================================
+
+Create a mobile verification screen matching the reference flow.
+
+Heading:
+
+"Verify your mobile"
+
+Show masked mobile number.
+
+Example:
+
++91 ******1234
+
+Allow six-digit OTP.
+
+Use the same robust OTP component.
+
+States:
+
+Correct OTP
+Wrong OTP
+Expired OTP
+Resend
+Loading
+
+==================================================
+AUTHENTICATOR / QR FLOW
+==================================================
+
+The reference screenshots contain an authenticator/QR-style verification portion.
+
+Create an authenticator verification screen.
+
+Show:
+
+"Set up your authenticator"
+
+QR-code placeholder or generated QR where appropriate.
+
+Provide:
+
+"Enter the 6-digit code"
+
+and six OTP inputs.
+
+Include:
+
+"Can't scan? Enter setup key"
+
+with a safe demo setup key only when appropriate.
+
+Do not expose real secrets.
+
+If actual TOTP implementation is added, use a standard library and environment-safe secret handling.
+
+==================================================
+REGISTRATION SUCCESS
+==================================================
+
+Create a success screen matching the reference style.
+
+Heading:
+
+"Account created"
+
+Text:
+
+"Your account has been created successfully."
+
+Button:
+
+"Continue to Login"
+
+==================================================
+LOGIN PAGE
+==================================================
+
+Create Login based on the reference screenshot.
+
+Heading:
+
+"Welcome back!"
+
+Subtitle:
+
+"Login to your account"
+
+Fields:
+
+Email
+Password
+
+Show/hide password.
+
+Include:
+
+Forgot password?
+
+Login button.
+
+Also include:
+
+"Continue with Google"
+
+if UI is required by the reference, but do not pretend Google authentication works unless implemented.
+
+If not implemented, label it clearly or make it configurable.
+
+Bottom:
+
+"Don't have an account? Create account"
+
+==================================================
+LOGIN VALIDATION
+==================================================
+
+Validate:
+
+Email required
+Valid email
+Password required
+
+If credentials are incorrect:
+
+Show:
+
+"Invalid email or password."
+
+Do not reveal whether email exists.
+
+Show loading state during login.
+
+Disable button while request is running.
+
+==================================================
+LOGIN API
+==================================================
+
+Create:
+
+POST /api/auth/login
+
+Request:
+
+{
+  email,
+  password
+}
+
+Backend:
+
+1. Find user.
+2. Compare password with bcrypt.
+3. Check account verification status.
+4. Create access token/session.
+5. Return safe authentication response.
+
+Never return password.
+
+Never expose sensitive database information.
+
+==================================================
+JWT AUTHENTICATION
+==================================================
+
+Implement JWT correctly.
+
+JWT payload should contain only required information, such as:
+
+{
+  userId: "..."
+}
+
+Use:
+
+JWT_SECRET
+
+from environment variables.
+
+Expiration:
+
+Prefer short-lived access tokens.
+
+Example:
+
+1 hour.
+
+Do not hardcode secrets in source code.
+
+==================================================
+TOKEN STORAGE
+==================================================
+
+Prefer secure architecture.
+
+If using cookie-based authentication:
+
+Use HttpOnly
+Secure in production
+SameSite appropriately
+
+Explain the implementation in README.
+
+If the assignment requires explicit client-side token handling, document the tradeoff clearly.
+
+Do NOT claim localStorage JWT removal is server-side invalidation.
+
+If refresh tokens are implemented, make them secure and revocable.
+
+==================================================
+AUTH MIDDLEWARE
+==================================================
+
+Create authentication middleware.
+
+It must:
+
+1. Read authentication credentials.
+2. Validate token/session.
+3. Decode user ID.
+4. Reject missing credentials.
+5. Reject expired token.
+6. Reject invalid token.
+7. Attach authenticated user information to request.
+
+Return:
+
+401 Unauthorized
+
+when authentication fails.
+
+==================================================
+/api/me
+==================================================
+
+This endpoint is REQUIRED.
+
+Create:
+
+GET /api/auth/me
+
+or:
+
+GET /api/me
+
+Prefer:
+
+GET /api/me
+
+It must return authenticated user information.
+
+Example:
+
+{
+  "id": "...",
+  "firstName": "...",
+  "lastName": "...",
+  "email": "...",
+  "mobile": "..."
+}
+
+Never return:
+
+password
+password hash
+OTP
+OTP hash
+JWT secret
+database credentials
+
+==================================================
+DASHBOARD
+==================================================
+
+Create a protected dashboard.
+
+Heading:
+
+"Welcome back, [First Name]"
+
+Show:
+
+Email
+Mobile
+Account status
+Verification status
+
+Example:
+
+Email:
+p***@gmail.com
+
+Mobile:
++91 ******1234
+
+Email:
+Verified
+
+Mobile:
+Verified
+
+Include Logout button.
+
+When page loads:
+
+Call /api/me.
+
+If authentication fails:
+
+Redirect to login.
+
+Do not trust only frontend state.
+
+==================================================
+PROTECTED ROUTES
+==================================================
+
+The dashboard must not be accessible to unauthenticated users.
+
+Frontend:
+check auth state.
+
+Backend:
+always enforce authentication.
+
+Do not rely only on JavaScript route protection.
+
+==================================================
+LOGOUT
+==================================================
+
+Create:
+
+POST /api/auth/logout
+
+if using server sessions or refresh-token revocation.
+
+For JWT-only access tokens, implement the appropriate logout strategy and explain it honestly.
+
+Frontend should clear authentication state.
+
+Redirect:
+
+/login.html
+
+Do not claim that deleting a client-side JWT alone invalidates an already-issued server-verifiable JWT.
+
+==================================================
+FORGOT PASSWORD
+==================================================
+
+Create:
+
+forgot-password.html
+
+Flow:
+
+Email
+↓
+Request reset
+↓
+OTP/reset link
+↓
+New password
+↓
+Confirm password
+↓
+Success
+↓
+Login
+
+Implement appropriate backend endpoints.
+
+Do not reveal whether an email is registered.
+
+==================================================
+ERROR STATES
+==================================================
+
+Every important API request needs:
+
+Loading
+Success
+Error
+
+Handle:
+
+400
+401
+403
+404
+409
+429
+500
+
+Display human-readable messages.
+
+Never display raw stack traces to users.
+
+==================================================
+SECURITY REQUIREMENTS
+==================================================
+
+Implement:
+
+- bcrypt password hashing
+- input validation
+- server-side validation
+- client-side validation
+- JWT/session authentication
+- secure cookies if using cookies
+- OTP expiration
+- OTP attempt limit
+- OTP resend cooldown
+- rate limiting where appropriate
+- CORS configuration
+- security headers
+- environment variables
+- no secrets in GitHub
+- no passwords in logs
+- no OTPs in production logs
+- no sensitive API responses
+
+Add .gitignore:
+
+node_modules
+.env
+.vercel
+
+==================================================
+DATABASE
+==================================================
+
+If using Supabase/PostgreSQL, create schema.
+
+Users table:
+
+id
+first_name
+last_name
+email
+mobile
+password_hash
+email_verified
+mobile_verified
+created_at
+updated_at
+
+OTP table:
+
+id
+user_id
+type
+otp_hash
+expires_at
+attempts
+verified
+created_at
+
+Sessions/refresh tokens if required:
+
+id
+user_id
+token_hash
+expires_at
+revoked
+created_at
+
+Password reset table if required.
+
+Use proper indexes.
+
+Email should be unique.
+
+==================================================
+API DESIGN
+==================================================
+
+Implement clean REST endpoints.
+
+Required:
+
+POST /api/auth/register
+
+POST /api/auth/send-otp
+
+POST /api/auth/verify-otp
+
+POST /api/auth/resend-otp
+
+POST /api/auth/login
+
+GET /api/me
+
+POST /api/auth/logout
+
+POST /api/auth/forgot-password
+
+POST /api/auth/reset-password
+
+GET /api/health
+
+Return consistent JSON.
+
+Example:
+
+{
+  "success": true,
+  "message": "..."
+}
+
+or:
+
+{
+  "success": false,
+  "message": "..."
+}
+
+==================================================
+ACCESSIBILITY
+==================================================
+
+Use:
+
+semantic HTML
+labels
+aria attributes where appropriate
+keyboard navigation
+visible focus states
+accessible error messages
+sufficient contrast
+
+OTP inputs must be keyboard friendly.
+
+Buttons must be actual buttons.
+
+Forms must work with Enter.
+
+==================================================
+UI DETAILS
+==================================================
+
+Create reusable UI components/functions for:
+
+Input fields
+Password field
+OTP input
+Button
+Alert
+Loading indicator
+Password strength meter
+
+Do not duplicate huge amounts of JavaScript.
+
+Keep code readable because I need to understand it for a live coding interview.
+
+Add comments only where useful.
+
+Do not fill files with useless comments.
+
+==================================================
+REFERENCE SCREENS
+==================================================
+
+The Assignment.pdf contains reference screenshots for:
+
+MOBILE LOGIN:
+
+1. Login Default
+2. Invalid Credentials
+3. Choose Method
+4. Email OTP
+5. Wrong OTP
+6. OTP Expired
+
+WEB LOGIN:
+
+1. Login Default
+2. Invalid Credentials
+3. Choose Method
+4. Email OTP
+5. Wrong OTP
+6. OTP Expired
+
+REGISTRATION:
+
+1. Registration Details
+2. Email Verification
+3. Wrong Email OTP
+4. Expired Email OTP
+5. Mobile Verification
+6. Wrong Mobile OTP
+7. Authenticator / QR
+8. Wrong Authenticator OTP
+9. Registration Success
+
+Use the actual Assignment.pdf screenshots as the visual reference whenever available.
+
+Do not replace the entire design with a generic authentication template.
+
+==================================================
+MICROINTERACTIONS
+==================================================
+
+Add polished but subtle interactions:
+
+Input focus
+Button hover
+Button loading
+OTP auto advance
+OTP backspace navigation
+Password strength updates
+Error shake only if tasteful
+Success check animation
+Page transitions if lightweight
+
+Do not overdo animations.
+
+==================================================
+FORM BEHAVIOR
+==================================================
+
+All forms must:
+
+- prevent default submission
+- validate client side
+- show errors
+- call API
+- show loading
+- handle response
+- handle errors
+- redirect after success
+
+Never silently fail.
+
+==================================================
+DEVELOPMENT MODE
+==================================================
+
+Create:
+
+.env.example
+
+Example:
+
+DATABASE_URL=
+SUPABASE_URL=
+SUPABASE_ANON_KEY=
+JWT_SECRET=
+RESEND_API_KEY=
+EMAIL_FROM=
+NODE_ENV=development
+
+Never put actual secrets in the repository.
+
+If credentials are missing, display a useful development setup message instead of crashing mysteriously.
+
+==================================================
+README
+==================================================
+
+Create a professional README.md.
+
+Include:
+
+1. Project overview
+2. Features
+3. Tech stack
+4. Folder structure
+5. Local setup
+6. Environment variables
+7. Database setup
+8. Running frontend/backend
+9. API documentation
+10. Authentication flow
+11. OTP flow
+12. JWT/session flow
+13. /api/me explanation
+14. Logout explanation
+15. Security considerations
+16. Vercel deployment
+17. GitHub deployment
+18. Troubleshooting
+
+VERY IMPORTANT:
+
+Add a section:
+
+"How I would explain this project in my live coding video"
+
+Include a simple explanation of:
+
+HTML
+CSS
+JavaScript
+Password strength
+OTP flow
+Authentication
+JWT/session
+Token storage
+Token transmission
+Token validation
+/api/me
+Logout
+
+This will help me understand the project.
+
+==================================================
+LIVE CODING REQUIREMENT
+==================================================
+
+The final code must be easy enough for me to manually recreate the following WITHOUT AI:
+
+1. Password show/hide.
+2. Password strength calculation.
+3. Weak/Medium/Strong UI.
+4. Registration prevention for weak password.
+
+Therefore:
+
+Keep these functions simple and readable.
+
+For example:
+
+function calculatePasswordStrength(password) {
+   ...
+}
+
+function togglePasswordVisibility() {
+   ...
+}
+
+Do not hide the logic behind unnecessary frameworks or libraries.
+
+==================================================
+TESTING
+==================================================
+
+After implementation, test:
+
+Registration:
+- empty form
+- invalid email
+- weak password
+- medium password
+- strong password
+- password mismatch
+- duplicate email
+- successful registration
+
+OTP:
+- empty OTP
+- incorrect OTP
+- expired OTP
+- resend
+- correct OTP
+- too many attempts
+
+Login:
+- empty email
+- invalid email
+- wrong password
+- correct login
+- unverified user
+- verified user
+
+Authentication:
+- missing token
+- invalid token
+- expired token
+- valid token
+- /api/me
+- logout
+- protected dashboard
+
+Responsive:
+- mobile
+- tablet
+- desktop
+
+==================================================
+VISTUAL QUALITY
+==================================================
+
+Before finishing:
+
+Inspect every page.
+
+Fix:
+- spacing
+- alignment
+- overflowing text
+- mobile layout
+- button sizes
+- input sizes
+- inconsistent colors
+- inconsistent fonts
+- broken links
+- console errors
+- network errors
+- broken API calls
+
+The final website should feel like one cohesive product.
+
+==================================================
+GIT
+==================================================
+
+Initialize Git if needed.
+
+Create useful commits, for example:
+
+Initial SecureID setup
+
+Implement registration UI
+
+Implement password strength
+
+Implement OTP flow
+
+Implement authentication API
+
+Implement login
+
+Implement protected dashboard
+
+Add security improvements
+
+Prepare Vercel deployment
+
+Do not commit:
+.env
+node_modules
+secrets
+API keys
+
+==================================================
+VERCEL
+==================================================
+
+Make the project Vercel-ready.
+
+Create the appropriate vercel.json only if needed.
+
+Ensure:
+
+- static pages load
+- API endpoints work
+- environment variables are documented
+- deep links don't produce unexpected 404s
+- API paths work in production
+- CORS/cookies work correctly
+- HTTPS behavior is correct
+
+The final intended URL is:
+
+https://YOUR-NAME-secureid.vercel.app
+
+Do not hardcode a fake URL.
+
+==================================================
+IMPORTANT IMPLEMENTATION RULES
+==================================================
+
+1. Do not stop at frontend.
+2. Do not create fake authentication.
+3. Do not store plaintext passwords.
+4. Do not expose secrets.
+5. Do not hardcode production OTP.
+6. Do not hardcode login credentials.
+7. Do not fake /api/me.
+8. Do not fake JWT validation.
+9. Do not make logout claims that are technically incorrect.
+10. Do not use AI-generated nonsense comments everywhere.
+11. Keep HTML/CSS/JS understandable.
+12. Match the supplied reference screenshots.
+13. Make mobile and desktop layouts.
+14. Make all important error states.
+15. Make the project deployable to Vercel.
+16. Make the GitHub repository clean.
+17. Make README complete.
+
+==================================================
+WORKFLOW FOR YOU
+==================================================
+
+Do NOT dump everything into one enormous file.
+
+Work systematically.
+
+STEP 1:
+Inspect Assignment.pdf and existing project files.
+
+STEP 2:
+Tell me the proposed architecture briefly.
+
+STEP 3:
+Create the project structure.
+
+STEP 4:
+Implement visual design.
+
+STEP 5:
+Implement registration.
+
+STEP 6:
+Implement password strength.
+
+STEP 7:
+Implement OTP.
+
+STEP 8:
+Implement backend.
+
+STEP 9:
+Implement database.
+
+STEP 10:
+Implement login.
+
+STEP 11:
+Implement JWT/session.
+
+STEP 12:
+Implement /api/me.
+
+STEP 13:
+Implement dashboard.
+
+STEP 14:
+Implement logout.
+
+STEP 15:
+Implement forgot password.
+
+STEP 16:
+Test everything.
+
+STEP 17:
+Fix errors.
+
+STEP 18:
+Prepare Vercel deployment.
+
+STEP 19:
+Prepare GitHub repository.
+
+STEP 20:
+Update README.
+
+At every stage, actually create/edit the files instead of merely telling me what code I could write.
+
+==================================================
+FINAL OUTPUT
+==================================================
+
+When implementation is complete, give me:
+
+1. Final folder structure.
+2. Important files created.
+3. How to run locally.
+4. Required npm commands.
+5. Required environment variables.
+6. Database setup instructions.
+7. Test credentials for development ONLY if appropriate.
+8. All API endpoints.
+9. How registration works.
+10. How OTP works.
+11. How login works.
+12. How JWT/session works.
+13. How /api/me works.
+14. How logout works.
+15. How to deploy to Vercel.
+16. How to push to GitHub.
+17. What I need to explain in the live coding video.
+18. Any configuration that I still need to manually add.
+
+DO NOT say the project is complete if there are unresolved build errors.
+
+Run the application/build/tests where possible and fix errors before declaring completion.
+
+Start now by inspecting Assignment.pdf and the current workspace, then implement the project.

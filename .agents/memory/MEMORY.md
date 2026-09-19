@@ -1,0 +1,1 @@
+- [OpenAPI codegen quirks](openapi-codegen-quirks.md) — keep Orval component names entity-shaped and include `dom.iterable` for generated fetch types.
